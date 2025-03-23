@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import HogItem from "./HogItem";
 
-function HogList({hogs}){
-    //console.log("hogs in Hog List", hogs)
-
+function HogList({hogs, greaseFilter}){
+    // add state for whether a pig tile was clicked
     const [clickedPig, setClickedPig] = useState("")
 
     function handleClick(name){
@@ -18,7 +17,6 @@ function HogList({hogs}){
             <h3>{name}</h3>
             {clickedPig === name && <HogItem greased={greased} highestMedal={highestMedal} specialty={specialty} weight={weight} />}
         </div>)
-
     })
 
     return (

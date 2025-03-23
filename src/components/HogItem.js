@@ -13,6 +13,4 @@ function HogItem({greased, highestMedal, specialty, weight}) {
 
 }
 
-
-
 export default HogItem;
