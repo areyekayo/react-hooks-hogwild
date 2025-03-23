@@ -5,26 +5,37 @@ import hogs from "../porkers_data";
 import FilterSort from "./FilterSort";
 
 function App() {
-	const [hogList, setHogs] = useState(hogs)
 	const [greaseFilter, setGreaseFilter] = useState("All")
+	const [sortKey, setSortKey] = useState(null)
 
 	function handleFilter(event){
 		setGreaseFilter(event.target.value)
 	}
 
-    const filteredPiggies = hogList.filter(hog => {
+	function handleSort(key){
+		setSortKey(key)
+	}
+
+	//filter pigs based on state grease filter
+    const filteredPiggies = hogs.filter(hog => {
         if (greaseFilter === "All"){
             return true
         }
         else return hog.greased.toString() === greaseFilter
     })
 
+	//sort pigs based state sort key (name or weight)
+	const sortedPiggies = [...filteredPiggies].sort((a, b) => {
+		if (!sortKey) return 0;
+		if (a[sortKey] > b[sortKey]) return 1
+		if (a[sortKey] < b[sortKey]) return -1
+	})
 
 	return (
 		<div className="App">
 			<Nav />
-			<FilterSort handleFilter={handleFilter} />
-			<HogList hogs={filteredPiggies} greaseFilter={greaseFilter}/>
+			<FilterSort handleFilter={handleFilter} handleSort={handleSort}/>
+			<HogList hogs={sortedPiggies}/>
 		</div>
 	);
 }

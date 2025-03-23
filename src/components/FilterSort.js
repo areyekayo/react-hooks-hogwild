@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterSort({handleFilter}) {
+function FilterSort({handleFilter, handleSort}) {
 
     return (
         <div>
@@ -9,6 +9,8 @@ function FilterSort({handleFilter}) {
                 <option value="true">Greased Piggies</option>
                 <option value="false">Ungreased Piggies</option>
             </select>
+            <button onClick={() => handleSort("name")}>Sort By Name</button>
+            <button onClick={() => handleSort("weight")}>Sort By Weight</button>
         </div>
     )
 }
